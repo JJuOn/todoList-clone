@@ -37,7 +37,12 @@ const insert=(req,res)=>{
     const DataCheck=()=>{
         return new Promise((resolve,reject)=>{
             if(!star || !subject || !content || !deadline){
-                reject({message:'Request body is undefined.'});
+                if(!subject){
+                    reject({result:false,code:'empty_param',data:'subject'});
+                }
+                else if(!content){
+                    reject({result:false,code:'empty_param',data:'content'});
+                }
             }
             else{
                 resolve()
@@ -94,10 +99,10 @@ const insert=(req,res)=>{
     .then(DoInsert)
     .then(Save)
     .then(()=>{
-        res.status(200).json({message:'Success'});
+        res.status(200).json({result:true,data:[],code:'success'});
     })
     .catch((err)=>{
-        res.status(500).json(err | err.message);
+        res.status(500).json(err|{result:false,data:[],code:'unknown_error'});
     });
 }
 
