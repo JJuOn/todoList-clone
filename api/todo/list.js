@@ -86,7 +86,7 @@ const list=(req,res)=>{
     .then(Filter)
     .then((data)=>{
         console.log('result:',data);
-        res.status(200).json({result:true,code:'success',data:data});
+        res.status(200).json({result:true,code:'success',data:{list:data}});
     })
     .catch((err)=>{
         res.status(500).json(err|err.message);

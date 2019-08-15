@@ -9,7 +9,7 @@ function call_api(api, params, callback) {
 		type:"POST",
 		data:params,
 		success:function(data) {
-			data = JSON.parse(data);
+			//data = JSON.parse(data);
 
 			if(data['code'] == "unknown_error")
 				handle_error();

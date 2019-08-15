@@ -84,7 +84,7 @@ const count=(req,res)=>{
     .then(Star)
     .then(Undone)
     .then(()=>{
-        res.status(200).json({result:true,code:'success',data:{all:all,dead:dead,done:done,impending:impending,star0:star0,star1:star1,star2:star2,undone:undone}});
+        res.status(200).json({result:true,code:'success',data:{count:{all:all,dead:dead,done:done,impending:impending,star0:star0,star1:star1,star2:star2,undone:undone}}});
     })
     .catch((err)=>{
         res.status(500).json(err|{result:false,code:'unknown_error',data:[]});

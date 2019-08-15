@@ -76,7 +76,7 @@ const insert=(req,res)=>{
                 td_star:star,
                 td_is_done:0,
                 td_registerd_at:currentTime
-            }
+            };
             todos['rows'].push(newTodo);
             todos['td_last_no']++;
             resolve(todos);
@@ -89,7 +89,32 @@ const insert=(req,res)=>{
                 if(err){
                     throw err;
                 }
-                resolve();
+                resolve(todos);
+            });
+        });
+    }
+
+    const InsertIntoNoti=(todos)=>{
+        return new Promise((resolve,reject)=>{
+            fs.readFile('./models/notification.json',(err,data)=>{
+                if(err){
+                    throw err;
+                }
+                let noti=JSON.parse(data);
+                let newNoti={
+                    nt_no:noti['nt_last_no']+1,
+                    nt_type:'insert',
+                    td_no:todos['td_last_no'],
+                    nt_registerd_at:currentTime
+                };
+                noti['rows'].push(newNoti);
+                noti['nt_last_no']++;
+                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err,data)=>{
+                    if(err){
+                        throw err;
+                    }
+                    resolve();
+                });
             });
         });
     }
@@ -98,6 +123,7 @@ const insert=(req,res)=>{
     .then(GetTodo)
     .then(DoInsert)
     .then(Save)
+    .then(InsertIntoNoti)
     .then(()=>{
         res.status(200).json({result:true,data:[],code:'success'});
     })
