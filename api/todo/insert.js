@@ -83,7 +83,7 @@ const insert=(req,res)=>{
 
     const Save=(todos)=>{
         return new Promise((resolve,reject)=>{
-            fs.writeFile('./models/todo.json',JSON.stringify(todos),(err)=>{
+            fs.writeFile('./models/todo.json',JSON.stringify(todos,null,4),(err)=>{
                 if(err){
                     throw err;
                 }
@@ -107,7 +107,7 @@ const insert=(req,res)=>{
                 };
                 noti['rows'].push(newNoti);
                 noti['nt_last_no']++;
-                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err)=>{
+                fs.writeFile('./models/notification.json',JSON.stringify(noti,null,4),(err)=>{
                     if(err){
                         throw err;
                     }

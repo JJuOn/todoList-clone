@@ -28,7 +28,7 @@ const dateFormatter=()=>{
 
 const edit=(req,res)=>{
     let no=Number(req.body.no);
-    let star=req.body.no;
+    let star=req.body.star;
     let subject=req.body.subject;
     let content=req.body.content;
     let deadline=req.body.deadline;
@@ -65,7 +65,7 @@ const edit=(req,res)=>{
                 }
                 noti['rows'].push(newNoti);
                 noti['nt_last_no']++;
-                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err,data)=>{
+                fs.writeFile('./models/notification.json',JSON.stringify(noti,null,4),(err,data)=>{
                     if(err){
                         throw err;
                     }
@@ -78,7 +78,7 @@ const edit=(req,res)=>{
                         noti['rows'].splice(i,1);
                     }
                 }
-                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err)=>{
+                fs.writeFile('./models/notification.json',JSON.stringify(noti,null,4),(err)=>{
                     if(err){
                         throw err;
                     }
@@ -94,7 +94,7 @@ const edit=(req,res)=>{
                 }
                 noti['rows'].push(newNoti);
                 noti['nt_last_no']++;
-                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err)=>{
+                fs.writeFile('./models/notification.json',JSON.stringify(noti,null,4),(err)=>{
                     if(err){
                         throw err;
                     }
@@ -116,7 +116,7 @@ const edit=(req,res)=>{
                 }
                 noti['rows'].push(newNoti);
                 noti['nt_last_no']++;
-                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err)=>{
+                fs.writeFile('./models/notification.json',JSON.stringify(noti,null,4),(err)=>{
                     if(err){
                         throw err;
                     }
@@ -149,12 +149,14 @@ const edit=(req,res)=>{
                     if(!deadline){
                         deadline=todos['rows'][i]['td_deadline'];
                     }
-                    if(!star){
+                    if(star!=0 && star!=1 && star!=2){
+                        console.log('no_star');
                         star=todos['rows'][i]['td_star'];
                     }
                     if(!isDone){
                         isDone=todos['rows'][i]['td_is_done'];
                     }
+                    console.log(todos['rows'][i]);
                     todos['rows'][i]={
                         td_no:no,
                         td_subject:subject,
@@ -164,7 +166,8 @@ const edit=(req,res)=>{
                         td_is_done:isDone,
                         td_is_registered_at:todos['rows'][i]['td_is_registered_at']
                     }
-                    fs.writeFile('./models/todo.json',JSON.stringify(todos),(err)=>{
+                    console.log(todos['rows'][i]);
+                    fs.writeFile('./models/todo.json',JSON.stringify(todos,null,4),(err)=>{
                         if(err){
                             throw err;
                         }

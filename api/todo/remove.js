@@ -27,7 +27,7 @@ const remove=(req,res)=>{
                     i=-1;
                 }
             }
-            fs.writeFile('./models/todo.json',JSON.stringify(todos),(err)=>{
+            fs.writeFile('./models/todo.json',JSON.stringify(todos,null,4),(err)=>{
                 if(err){
                     throw err;
                 }
@@ -53,7 +53,7 @@ const remove=(req,res)=>{
                     i=-1;
                 }
             }
-            fs.writeFile('./models/notification.json',JSON.stringify(noti),(err)=>{
+            fs.writeFile('./models/notification.json',JSON.stringify(noti,null,4),(err)=>{
                 if(err){
                     throw err;
                 }
