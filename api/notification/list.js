@@ -31,7 +31,7 @@ const list=(req,res)=>{
                         }
                     }
                 }
-                resolve(result);
+                resolve(result.reverse());
             });
         });
     }
