@@ -70,6 +70,7 @@ const remove=(req,res)=>{
         res.status(200).json({result:true,code:'success'});
     })
     .catch((err)=>{
+        console.error(err);
         res.staus(500).json(err|{result:false,code:'unknown_error'});
     });
 }

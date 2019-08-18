@@ -126,6 +126,7 @@ const insert=(req,res)=>{
         res.status(200).json({result:true,data:[],code:'success'});
     })
     .catch((err)=>{
+        console.error(err);
         res.status(500).json(err|{result:false,data:[],code:'unknown_error'});
     });
 }

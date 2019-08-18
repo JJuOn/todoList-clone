@@ -82,6 +82,7 @@ const list=(req,res)=>{
         res.status(200).json({result:true,code:'success',data:{list:data}});
     })
     .catch((err)=>{
+        console.error(err);
         res.status(500).json(err|err.message);
     });
 }
