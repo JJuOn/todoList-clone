@@ -107,7 +107,7 @@ const insert=(req,res)=>{
                 };
                 noti['rows'].push(newNoti);
                 noti['nt_last_no']++;
-                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err,data)=>{
+                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err)=>{
                     if(err){
                         throw err;
                     }

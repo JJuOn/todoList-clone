@@ -33,7 +33,6 @@ const edit=(req,res)=>{
     let content=req.body.content;
     let deadline=req.body.deadline;
     let isDone=req.body.is_done;
-    console.log(no,star,subject,content,deadline,isDone);
     const DataCheck=()=>{
         return new Promise((resolve,reject)=>{
             if(!no){
@@ -79,7 +78,7 @@ const edit=(req,res)=>{
                         noti['rows'].splice(i,1);
                     }
                 }
-                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err,data)=>{
+                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err)=>{
                     if(err){
                         throw err;
                     }
@@ -87,44 +86,20 @@ const edit=(req,res)=>{
                 });
             }
             else if(subject || content || deadline){
-                if(star==0 || star==1 || star==2){
-                    for(let i=0;i<noti['rows'].length;i++){
-                        if(noti['rows'][i]['nt_type']=='star' && noti['rows'][i]['td_no']==no){
-                            noti['rows'].splice(i,1);
-                            break;
-                        }
-                    }
-                    let newNoti={
-                        nt_no:noti['nt_last_no']+1,
-                        nt_type:'edit',
-                        td_no:no,
-                        nt_registered_at:dateFormatter()
-                    }
-                    noti['rows'].push(newNoti);
-                    noti['nt_last_no']++;
-                    fs.writeFile('./models/notification.json',JSON.stringify(noti),(err,data)=>{
-                        if(err){
-                            throw err;
-                        }
-                        resolve();
-                    });
+                let newNoti={
+                    nt_no:noti['nt_last_no']+1,
+                    nt_type:'edit',
+                    td_no:no,
+                    nt_registered_at:dateFormatter()
                 }
-                else{
-                    let newNoti={
-                        nt_no:noti['nt_last_no']+1,
-                        nt_type:'edit',
-                        td_no:no,
-                        nt_registered_at:dateFormatter()
+                noti['rows'].push(newNoti);
+                noti['nt_last_no']++;
+                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err)=>{
+                    if(err){
+                        throw err;
                     }
-                    noti['rows'].push(newNoti);
-                    noti['nt_last_no']++;
-                    fs.writeFile('./models/notification.json',JSON.stringify(noti),(err,data)=>{
-                        if(err){
-                            throw err;
-                        }
-                        resolve();
-                    });
-                }
+                    resolve();
+                });
             }
             else {
                 for(let i=0;i<noti['rows'].length;i++){
@@ -141,7 +116,7 @@ const edit=(req,res)=>{
                 }
                 noti['rows'].push(newNoti);
                 noti['nt_last_no']++;
-                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err,data)=>{
+                fs.writeFile('./models/notification.json',JSON.stringify(noti),(err)=>{
                     if(err){
                         throw err;
                     }
@@ -189,7 +164,7 @@ const edit=(req,res)=>{
                         td_is_done:isDone,
                         td_is_registered_at:todos['rows'][i]['td_is_registered_at']
                     }
-                    fs.writeFile('./models/todo.json',JSON.stringify(todos),(err,data)=>{
+                    fs.writeFile('./models/todo.json',JSON.stringify(todos),(err)=>{
                         if(err){
                             throw err;
                         }
