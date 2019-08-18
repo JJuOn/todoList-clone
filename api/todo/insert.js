@@ -27,7 +27,7 @@ const dateFormatter=()=>{
 }
 
 const insert=(req,res)=>{
-    const star=req.body.star;
+    let star=req.body.star;
     const subject=req.body.subject;
     const content=req.body.content;
     const deadline=req.body.deadline;
@@ -67,6 +67,9 @@ const insert=(req,res)=>{
 
     const DoInsert=(todos)=>{
         return new Promise((resolve,reject)=>{
+            if(!star){
+                star="0";
+            }
             const newTodo={
                 td_no:todos.td_last_no+1,
                 td_subject:subject,
