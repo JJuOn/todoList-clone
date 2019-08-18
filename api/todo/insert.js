@@ -32,7 +32,6 @@ const insert=(req,res)=>{
     const content=req.body.content;
     const deadline=req.body.deadline;
     const currentTime=dateFormatter();
-    console.log(currentTime);
 
     const DataCheck=()=>{
         return new Promise((resolve,reject)=>{
@@ -59,7 +58,6 @@ const insert=(req,res)=>{
                 }
                 else{
                     todos=JSON.parse(data);
-                    console.log(todos);
                     resolve(todos);
                 }
             });

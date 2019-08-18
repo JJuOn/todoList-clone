@@ -41,15 +41,12 @@ const list=(req,res)=>{
                         is_done:todos['rows'][i]['td_is_done'],
                         remainder:remainder
                     }
-                    console.log(temp);
                     if(star){
-                        console.log('star:',star);
                         if(temp.star==star){
                             data.push(temp);
                         }
                     }
                     else if(isImpending && isDone){
-                        console.log('isImpending:',isImpending,'isDone:',isDone);
                         if(isImpending=='impending'){
                             if(temp.remainder=="오늘" && temp.is_done==isDone){
                                 data.push(temp);
@@ -62,19 +59,16 @@ const list=(req,res)=>{
                         }
                     }
                     else if(!isImpending && isDone){
-                        console.log('isDone:',isDone);
                         if(temp.is_done==isDone){
                             data.push(temp);
                         }
                     }
                     else{
-                        console.log('all');
                         data.push(temp);
                     }
                 }
             }
             catch (err){
-                console.error(err);
                 reject(err);
             }
             data.sort((a,b)=>{a.star>b.star});
@@ -85,7 +79,6 @@ const list=(req,res)=>{
     GetTodo()
     .then(Filter)
     .then((data)=>{
-        console.log('result:',data);
         res.status(200).json({result:true,code:'success',data:{list:data}});
     })
     .catch((err)=>{
