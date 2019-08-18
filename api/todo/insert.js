@@ -35,17 +35,18 @@ const insert=(req,res)=>{
 
     const DataCheck=()=>{
         return new Promise((resolve,reject)=>{
-            if(!star || !subject || !content || !deadline){
+            if(!subject || !content || !deadline){
                 if(!subject){
                     reject({result:false,code:'empty_param',data:'subject'});
                 }
                 else if(!content){
                     reject({result:false,code:'empty_param',data:'content'});
                 }
+                else{
+                    reject({result:false,code:'empty_param',data:'deadline'});
+                }
             }
-            else{
-                resolve()
-            }
+            resolve();
         });
     }
 
