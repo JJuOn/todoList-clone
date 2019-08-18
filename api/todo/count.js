@@ -22,7 +22,7 @@ const count=(req,res)=>{
     const Dead=(todos)=>{
         return new Promise((resolve,reject)=>{
             for(let i=0;i<todos['rows'].length;i++){
-                if(todos['rows'][i]['td_is_done']==0 && (todos['rows'][i]['td_deadline'].replace(/-/g,'/')-new Date())<0){
+                if(todos['rows'][i]['td_is_done']==0 && new Date(todos['rows'][i]['td_deadline'].replace(/-/g,'/'))-new Date() <0){
                     dead++;
                 }
             }
@@ -42,8 +42,8 @@ const count=(req,res)=>{
     const Impending=(todos)=>{
         return new Promise((resolve,reject)=>{
             for(let i=0;i<todos['rows'].length;i++){
-                if((todos['rows'][i]['td_deadline'].replace(/-/g,'/')-new Date())>=0 && todos['rows'][i]['td_is_done']==0){
-                    impending++
+                if( new Date(todos['rows'][i]['td_deadline'].replace(/-/g,'/')) - new Date() >=0 && todos['rows'][i]['td_is_done']==0){
+                    impending++;
                 }
             }
             resolve(todos);

@@ -150,13 +150,11 @@ const edit=(req,res)=>{
                         deadline=todos['rows'][i]['td_deadline'];
                     }
                     if(star!=0 && star!=1 && star!=2){
-                        console.log('no_star');
                         star=todos['rows'][i]['td_star'];
                     }
                     if(!isDone){
                         isDone=todos['rows'][i]['td_is_done'];
                     }
-                    console.log(todos['rows'][i]);
                     todos['rows'][i]={
                         td_no:no,
                         td_subject:subject,
@@ -166,7 +164,6 @@ const edit=(req,res)=>{
                         td_is_done:isDone,
                         td_is_registered_at:todos['rows'][i]['td_is_registered_at']
                     }
-                    console.log(todos['rows'][i]);
                     fs.writeFile('./models/todo.json',JSON.stringify(todos,null,4),(err)=>{
                         if(err){
                             throw err;
