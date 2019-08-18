@@ -28,9 +28,22 @@ const dateFormatter=()=>{
 
 const insert=(req,res)=>{
     let star=req.body.star;
-    const subject=req.body.subject;
-    const content=req.body.content;
-    const deadline=req.body.deadline;
+    let subject=req.body.subject;
+    let content=req.body.content;
+    let deadline=req.body.deadline;
+    if(!deadline){
+        const now=new Date();
+        const year=now.getFullYear();
+        let month=now.getMonth()+1;
+        if(month.toString().length==1){
+        month='0'+month;
+        }
+        let date=now.getDate();
+        if(date.toString().length==1){
+            date='0'+date;
+        }
+        deadline=`${year}-${month}-${date}`;
+    }
     const currentTime=dateFormatter();
 
     const DataCheck=()=>{

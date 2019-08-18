@@ -27,7 +27,6 @@ $(function() {
 		$("#write").addClass("focus");
 		$("#write-subject").removeAttr("placeholder");
 	});
-	
 	$('.datepicker').datepicker({
 		container:'body',
 		format:"yyyy-mm-dd",
@@ -40,14 +39,14 @@ $(function() {
 			weekdays:['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
 			weekdaysShort:['일','월','화','수','목','금','토'],
 			weekdaysAbbrev:['일','월','화','수','목','금','토']
-		}
-	});
+		},
+	}).datepicker("setDate",new Date());
 
 	$("#write-star-icon").click(function() {
 		$("#write-star").val(change_star($(this)));
 	});
 
-	$("#write form").on("submit", function() {
+	$("#write-form").on("submit", function() {
 		if($("#write-subject").val() == "") {
 			handle_error("제목을 입력해주세요.");
 			return false;
@@ -57,7 +56,6 @@ $(function() {
 			handle_error("내용을 입력해주세요.");
 			return false;
 		}
-
 		insert_todo(toObject($(this).serializeArray()));
 
 		return false;
@@ -73,7 +71,6 @@ $(function() {
 			handle_error("내용을 입력해주세요.");
 			return false;
 		}
-
 		edit_todo(toObject($(this).serializeArray()));
 
 		return false;

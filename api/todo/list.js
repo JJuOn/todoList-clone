@@ -27,7 +27,7 @@ const list=(req,res)=>{
                     if(remainder<0){
                         remainder="마감";
                     }
-                    else if(remainder==0){
+                    else if(remainder>=0 && remainder<1){
                         remainder="오늘"
                     }
                     else{
@@ -46,9 +46,9 @@ const list=(req,res)=>{
                             data.push(temp);
                         }
                     }
-                    else if(isImpending && isDone){
+                    else if(isImpending && isDone==0){
                         if(isImpending=='impending'){
-                            if(temp.remainder=="오늘" && temp.is_done==isDone){
+                            if( (temp.remainder=="오늘" || temp.remainder=="1일") && temp.is_done==isDone){
                                 data.push(temp);
                             }
                         }
